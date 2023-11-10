@@ -153,5 +153,27 @@ public class Sort {
         System.out.println("Selection Sort Worst time: " + (time2 - time1));
         System.out.println("Selection Sort Best time: " + (time3 - time2));
         System.out.println("Selection Sort Random time: " + (time4 - time3));
+
+        System.out.println("Before Sort");
+        display(worst1);
+        display(best1);
+        display(rand1);
+
+        time1 = System.nanoTime();
+        Sort.insertion_sort(worst1);
+        time2 = System.nanoTime();
+        Sort.insertion_sort(best1);
+        time3 = System.nanoTime();
+        Sort.insertion_sort(rand1);
+        time4 = System.nanoTime();
+
+        System.out.println("After sort");
+        display(worst1);
+        display(best1);
+        display(rand1);
+
+        System.out.println("Insertion Sort Worst time: " + (time2 - time1));
+        System.out.println("Insertion Sort Best time: " + (time3 - time2));
+        System.out.println("Insertion Sort Random time: " + (time4 - time3));
     }
 }
