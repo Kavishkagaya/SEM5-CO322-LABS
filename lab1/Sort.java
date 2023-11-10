@@ -87,10 +87,12 @@ public class Sort {
 
     static void insertion_sort(int[] data) {
         // Implement
-        int len = data.length;
-        for (int i = 1; i < len; i++) {
-            for (int j = i; j > 0 && data[j] < data[j - 1]; j--)
-                swap(data, j, j - 1);
+        int curr_pos = 0;
+        while (!isSorted(data)) {
+            for (int i = curr_pos + 1; i > 0 && data[i] < data[i - 1]; i--) {
+                swap(data, i, i - 1);
+            }
+            curr_pos++;
         }
     }
 
