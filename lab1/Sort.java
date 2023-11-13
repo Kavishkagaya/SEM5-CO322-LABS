@@ -102,78 +102,86 @@ public class Sort {
         // sort the array.
         // Think about effects of caches, other apps running etc.
 
-        int[] worst1 = Sort.create_worst_data(5);
-        int[] best1 = Sort.create_best_data(5);
-        int[] rand1 = { 12, 65, 56, 97, 45 };
+        System.out.print(" \t\t Bubble \t\t Selection \t\t Insertion \n");
 
-        System.out.println("Before sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+        for (int i = 10; i < 100000; i *= 5) {
+            System.out.print(i + "\t ");
 
-        long time1 = System.nanoTime();
-        Sort.buble_sort(worst1);
-        long time2 = System.nanoTime();
-        Sort.buble_sort(best1);
-        long time3 = System.nanoTime();
-        Sort.buble_sort(rand1);
-        long time4 = System.nanoTime();
+            int[] worst1 = Sort.create_worst_data(i);
+            int[] best1 = Sort.create_best_data(i);
+            int[] rand1 = Sort.create_rand_data(i);
 
-        System.out.println("After sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+            // System.out.println("Before sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
 
-        System.out.println("Bubble Sort Worst time: " + (time2 - time1));
-        System.out.println("Bubble Sort Best time: " + (time3 - time2));
-        System.out.println("Bubble Sort Random time: " + (time4 - time3));
+            long time1 = System.nanoTime();
+            Sort.buble_sort(worst1);
+            long time2 = System.nanoTime();
+            Sort.buble_sort(best1);
+            long time3 = System.nanoTime();
+            Sort.buble_sort(rand1);
+            long time4 = System.nanoTime();
 
-        worst1 = Sort.create_worst_data(5);
-        best1 = Sort.create_best_data(5);
-        rand1 = Sort.create_rand_data(5);
+            // System.out.println("After sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
 
-        System.out.println("Before Sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+            System.out.print(time2 - time1 + " ");
+            System.out.print(time3 - time2 + " ");
+            System.out.print(time4 - time3 + "\t ");
 
-        time1 = System.nanoTime();
-        Sort.selection_sort(worst1);
-        time2 = System.nanoTime();
-        Sort.selection_sort(best1);
-        time3 = System.nanoTime();
-        Sort.selection_sort(rand1);
-        time4 = System.nanoTime();
+            worst1 = Sort.create_worst_data(i);
+            best1 = Sort.create_best_data(i);
+            rand1 = Sort.create_rand_data(i);
 
-        System.out.println("After sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+            // System.out.println("Before Sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
 
-        System.out.println("Selection Sort Worst time: " + (time2 - time1));
-        System.out.println("Selection Sort Best time: " + (time3 - time2));
-        System.out.println("Selection Sort Random time: " + (time4 - time3));
+            time1 = System.nanoTime();
+            Sort.selection_sort(worst1);
+            time2 = System.nanoTime();
+            Sort.selection_sort(best1);
+            time3 = System.nanoTime();
+            Sort.selection_sort(rand1);
+            time4 = System.nanoTime();
 
-        System.out.println("Before Sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+            // System.out.println("After sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
 
-        time1 = System.nanoTime();
-        Sort.insertion_sort(worst1);
-        time2 = System.nanoTime();
-        Sort.insertion_sort(best1);
-        time3 = System.nanoTime();
-        Sort.insertion_sort(rand1);
-        time4 = System.nanoTime();
+            System.out.print(time2 - time1 + " ");
+            System.out.print(time3 - time2 + " ");
+            System.out.print(time4 - time3 + " \t");
 
-        System.out.println("After sort");
-        display(worst1);
-        display(best1);
-        display(rand1);
+            // System.out.println("Before Sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
 
-        System.out.println("Insertion Sort Worst time: " + (time2 - time1));
-        System.out.println("Insertion Sort Best time: " + (time3 - time2));
-        System.out.println("Insertion Sort Random time: " + (time4 - time3));
+            time1 = System.nanoTime();
+            Sort.insertion_sort(worst1);
+            time2 = System.nanoTime();
+            Sort.insertion_sort(best1);
+            time3 = System.nanoTime();
+            Sort.insertion_sort(rand1);
+            time4 = System.nanoTime();
+
+            // System.out.println("After sort");
+            // display(worst1);
+            // display(best1);
+            // display(rand1);
+
+            System.out.print(time2 - time1 + " ");
+            System.out.print(time3 - time2 + " ");
+            System.out.print(time4 - time3 + " ");
+
+            System.out.print("\n");
+        }
     }
 }
