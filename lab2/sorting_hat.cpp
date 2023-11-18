@@ -9,7 +9,14 @@ void swap(int array[], int i, int j)
     array[j] = temp;
 }
 
-void quickSort(int array[], int start, int end)
+void swap(string array[], int i, int j)
+{
+    string temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
+
+void quickSort(int array[], string name[], int start, int end)
 {
     if (end <= start)
         return;
@@ -23,25 +30,44 @@ void quickSort(int array[], int start, int end)
         {
             i++;
             swap(array, i, j);
+            swap(name, i, j);
         }
     }
     i++;
     swap(array, i, end);
+    swap(name, i, end);
 
-    quickSort(array, start, i - 1);
-    quickSort(array, i + 1, end);
+    quickSort(array, name, start, i - 1);
+    quickSort(array, name, i + 1, end);
 }
 
 void print_arr(int array[], int len)
 {
-    for (int i = 0; i < len; i++)
+    cout << '[';
+    for (int i = len - 1; i >= 0; i--)
     {
         cout << array[i];
-        if (i < len - 1)
+        if (i != 0)
         {
-            cout << ',';
+            cout << ", ";
         }
     }
+    cout << ']';
+    cout << endl;
+}
+
+void print_arr(string array[], int len)
+{
+    cout << '[';
+    for (int i = len - 1; i >= 0; i--)
+    {
+        cout << '\'' << array[i] << '\'';
+        if (i != 0)
+        {
+            cout << ", ";
+        }
+    }
+    cout << ']';
     cout << endl;
 }
 
@@ -64,8 +90,18 @@ int main()
         cin >> brave[i];
     }
 
-    cout << name[0] << endl;
+    quickSort(brave, name, 0, len - 1);
+
+    print_arr(name, len);
     print_arr(brave, len);
+
+    for (int i = len - 1; i >= 0; i--)
+    {
+        if (i < len - 5)
+            break;
+        if (brave[i] > 500)
+            cout << name[i] << endl;
+    }
 
     return 0;
 }
