@@ -12,7 +12,7 @@ void swap(int array[], int i, int j)
     array[j] = temp;
 }
 
-void quickSort(int array[], int index[], int start, int end)
+void quickSort(int array[], int start, int end)
 {
     if (end <= start)
         return;
@@ -26,21 +26,19 @@ void quickSort(int array[], int index[], int start, int end)
         {
             i++;
             swap(array, i, j);
-            swap(index, i, j);
         }
     }
     i++;
     swap(array, i, end);
-    swap(index, i, end);
 
-    quickSort(array, index, start, i - 1);
-    quickSort(array, index, i + 1, end);
+    quickSort(array, start, i - 1);
+    quickSort(array, i + 1, end);
 }
 
 int binarySearch(int *array, int start, int end, int value)
 {
     int mid = start + (end - start) / 2;
-    if (start >= end)
+    if (start > end)
         return -1;
     if (array[mid] == value)
         return mid;
@@ -58,17 +56,18 @@ int main()
     cin >> value >> len;
 
     int arr[len];
-    int index[len];
 
     for (int i = 0; i < len; i++)
     {
         cin >> arr[i];
-        index[i] = i;
     }
 
-    quickSort(arr, index, 0, len - 1);
-    if (int ind = binarySearch(arr, 0, len - 1, value))
-        cout << "Bicorn Horn is present at index " << index[ind] << endl;
+    quickSort(arr, 0, len - 1);
+    int ind = binarySearch(arr, 0, len - 1, value);
+    if (ind > -1)
+        cout << "Bicorn Horn is present at index " << ind << endl;
+    else
+        cout << "Bicorn Horn is not found!" << endl;
 
     return 0;
 }
