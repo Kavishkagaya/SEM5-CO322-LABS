@@ -3,37 +3,32 @@
 
 using namespace std;
 
-void shortdis(int currX, int currY, int endX, int endY, int distance, vector<vector<int>> &grid, vector<vector<int>> &dis)
+int shortDis(int sx, int sy, int ex, int ey, vector<vector<int>> &grid, int dis)
 {
-    if (currX < 0 || currY < 0 || currX >= grid.size() || currY >= grid[0].size())
-    {
-        return;
-    }
-    if (grid[currX][currY] == 0)
-    {
-        return;
-    }
-    if (dis[currX][currY] > 0)
-    {
-        if (dis[currX][currY] > distance)
-            dis[currX][currY] = distance;
-        return;
-    }
+    if (grid[sx][sy] == 0)
+        return -1;
+    if (sx == ex && sy == ey)
+        return dis;
 
-    if (dis[currX][currY] < 0 || distance < dis[currX][currY])
-    {
-        dis[currX][currY] = distance;
-    }
+    dis++;
+    int rowDir = (ex - sx) > 0 ? 1 : ((ex - sx) < 0 ? -1 : 0);
+    int colDir = (ey - sy) > 0 ? 1 : ((ey - sy) < 0 ? -1 : 0);
 
-    if (currX == endX && currY == endY)
-    {
-        return;
-    }
+    int dis1 = -1;
+    int dis2 = -1;
 
-    shortdis(currX + 1, currY, endX, endY, distance + 1, grid, dis);
-    shortdis(currX, currY + 1, endX, endY, distance + 1, grid, dis);
-    shortdis(currX - 1, currY, endX, endY, distance + 1, grid, dis);
-    shortdis(currX, currY - 1, endX, endY, distance + 1, grid, dis);
+    if (rowDir != 0)
+        dis1 = shortDis(sx + rowDir, sy, ex, ey, grid, dis);
+    if (colDir != 0)
+        dis2 = shortDis(sx, sy + colDir, ex, ey, grid, dis);
+
+    if (dis1 == -1 && dis2 == -1)
+        return -1;
+    if (dis1 == -1)
+        return dis2;
+    if (dis2 == -1)
+        return dis1;
+    return min(dis1, dis2);
 }
 
 int main()
@@ -53,35 +48,10 @@ int main()
         }
     }
 
-    vector<vector<int>> dis(h, vector<int>(w, -1));
+    int dis = shortDis(sx, sy, ex, ey, grid, 0);
 
-    shortdis(sx, sy, ex, ey, 0, grid, dis);
-    
-    cout << sx << " " << sy << endl;
-    cout << ex << " " << ey << endl;
-    
-    for (int i = 0; i < h; i++)
-    {
-        for (int j = 0; j < w; j++)
-        {
-            cout << grid[i][j] << " ";
-        }
-        cout << "\n";
-    }
-    
-    cout << "\n";
-    
-    for (int i = 0; i < h; i++)
-    {
-        for (int j = 0; j < w; j++)
-        {
-            cout << dis[i][j] << " ";
-        }
-        cout << "\n";
-    }
-
-    if (dis[ex][ey] > 0)
-        cout << "The minimum distance is " << dis[ex][ey] << endl;
+    if (dis > 0)
+        cout << "The minimum distance is " << dis << endl;
     else
         cout << "There is no possible path" << endl;
 
